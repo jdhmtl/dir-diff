@@ -1,6 +1,6 @@
 # Dir Diff
 
-Display file name diffs of two directories.
+Display file name diffs between two directories.
 
 The intended use case is to easily spot missing files across directories expected to contain the same files in different formats.
 
