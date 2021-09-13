@@ -3,7 +3,7 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-from src.display import Display
+from src.display import TableDisplay
 
 
 def compare(left: str, right: str):
@@ -16,8 +16,8 @@ def compare(left: str, right: str):
     only_in_left = only_in_list(left_files, right_files)
     only_in_right = only_in_list(right_files, left_files)
 
-    display = Display(left, only_in_left, right, only_in_right)
-    display.table()
+    table = TableDisplay(left, only_in_left, right, only_in_right)
+    table.display()
 
 
 def directory_contents(path: Path):
