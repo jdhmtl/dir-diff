@@ -3,6 +3,8 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
+from src.display import TableDisplay
+
 
 def compare(left: str, right: str):
     left_path = Path(left).resolve()
@@ -14,7 +16,8 @@ def compare(left: str, right: str):
     only_in_left = only_in_list(left_files, right_files)
     only_in_right = only_in_list(right_files, left_files)
 
-    display_differences(left, only_in_left, right, only_in_right)
+    table = TableDisplay(left, only_in_left, right, only_in_right)
+    table.display()
 
 
 def directory_contents(path: Path):
@@ -28,35 +31,6 @@ def directory_contents(path: Path):
             contents.append(item)
 
     return contents
-
-
-def display_differences(left_path: str, left_files: list, right_path: str, right_files: list):
-    if len(left_files) == 0 and len(right_files) == 0:
-        print("Directories contain the same files")
-        return
-
-    left_width = max(len(left_path), get_max_length(left_files))
-    right_width = max(len(right_path), get_max_length(right_files))
-
-    print(("=" * (left_width + 4)) + ("=" * (right_width + 3)))
-    print("| " + left_path.ljust(left_width) + " | " + right_path.ljust(right_width) + " |")
-    print(("=" * (left_width + 4)) + ("=" * (right_width + 3)))
-    for i in range(0, max(len(left_files), len(right_files))):
-        if i < len(left_files):
-            left = left_files[i]
-        else:
-            left = ""
-
-        if i < len(right_files):
-            right = right_files[i]
-        else:
-            right = ""
-
-        print("| " + left.ljust(left_width) + " | " + right.ljust(right_width) + " |")
-
-    print(("=" * (left_width + 4)) + ("=" * (right_width + 3)))
-    print("| " + (str(len(left_files))).rjust(left_width) + " | " + (str(len(right_files))).rjust(right_width) + " |")
-    print(("=" * (left_width + 4)) + ("=" * (right_width + 3)))
 
 
 def dominant_file_type(files: list):
@@ -91,15 +65,6 @@ def get_dominant_files(path: Path):
     matching_files = files_of_type(files, file_type)
 
     return matching_files
-
-
-def get_max_length(strings: list):
-    max_length = 0
-    for string in strings:
-        if len(string) > max_length:
-            max_length = len(string)
-
-    return max_length
 
 
 def only_in_list(reference: list, compared: list):
