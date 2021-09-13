@@ -16,8 +16,8 @@ def compare(left: str, right: str):
 
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument("left", help="Directory to compare")
-    parser.add_argument("right", help="Other directory to compare")
+    parser.add_argument("left", help="Directory on left side of comparison")
+    parser.add_argument("right", help="Directory on right side of comparison")
     args = parser.parse_args()
 
     try:

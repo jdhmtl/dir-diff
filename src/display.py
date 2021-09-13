@@ -1,4 +1,3 @@
-
 class TableDisplay:
     def __init__(self, left_path: str, left_files: list, right_path: str, right_files: list):
         self.left_path = left_path
@@ -23,16 +22,16 @@ class TableDisplay:
 
         print("\n".join(output))
 
-    def _get_column_width(self, path: str, files: list):
+    def _get_column_width(self, path: str, files: list) -> int:
         if not files:
             return len(path)
 
         return max(len(path), max(len(item) for item in files))
 
-    def _table_border(self):
+    def _table_border(self) -> str:
         return "+" + ("=" * (self.left_column_width + 2)) + "+" + ("=" * (self.right_column_width + 2)) + "+"
 
-    def _table_header(self):
+    def _table_header(self) -> list[str]:
         output = []
 
         left_path = self.left_path.ljust(self.left_column_width)
@@ -44,10 +43,10 @@ class TableDisplay:
 
         return output
 
-    def _table_row(self, left: str, right: str):
+    def _table_row(self, left: str, right: str) -> str:
         return f"| {left} | {right} |"
 
-    def _table_footer(self):
+    def _table_footer(self) -> list[str]:
         output = []
 
         left_file_count = (str(len(self.left_files))).rjust(self.left_column_width)
@@ -59,7 +58,7 @@ class TableDisplay:
 
         return output
 
-    def _file_row(self, index: int):
+    def _file_row(self, index: int) -> str:
         left = ""
         if index < len(self.left_files):
             left = self.left_files[index]
