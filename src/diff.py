@@ -51,6 +51,8 @@ def display_differences(left_path: str, left_files: list, right_path: str, right
         print("| " + left.ljust(left_width) + " | " + right.ljust(right_width) + " |")
 
     print(("=" * (left_width + 4)) + ("=" * (right_width + 3)))
+    print("| " + (str(len(left_files))).rjust(left_width) + " | " + (str(len(right_files))).rjust(right_width) + " |")
+    print(("=" * (left_width + 4)) + ("=" * (right_width + 3)))
 
 
 def dominant_file_type(files: list):
