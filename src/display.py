@@ -24,6 +24,9 @@ class TableDisplay:
         print("\n".join(output))
 
     def _get_column_width(self, path: str, files: list):
+        if not files:
+            return len(path)
+
         return max(len(path), max(len(item) for item in files))
 
     def _table_border(self):
