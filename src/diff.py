@@ -31,6 +31,10 @@ def directory_contents(path: Path):
 
 
 def display_differences(left_path: str, left_files: list, right_path: str, right_files: list):
+    if len(left_files) == 0 and len(right_files) == 0:
+        print("Directories contain the same files")
+        return
+
     left_width = max(len(left_path), get_max_length(left_files))
     right_width = max(len(right_path), get_max_length(right_files))
 
