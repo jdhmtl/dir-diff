@@ -97,9 +97,11 @@ def get_max_length(strings: list):
 
 
 def only_in_list(reference: list, compared: list):
+    compared_lower = list(map(lambda name: name.lower(), compared))
+
     missing = []
     for item in reference:
-        if item not in compared:
+        if item.lower() not in compared_lower:
             missing.append(item)
 
     return missing
